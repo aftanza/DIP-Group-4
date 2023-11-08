@@ -35,7 +35,7 @@ export const CreateRoom = ()=> {
     const setIsPublic = () => {
         if (isPublic == 'yes') {
             isPublic = 'no';
-            console.log('isPublic is a no')
+            console.log('isPublic is a no blah')
             //() => setIndex(0);
         } else {
             isPublic = 'yes';
