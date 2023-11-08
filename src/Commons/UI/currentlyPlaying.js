@@ -52,6 +52,7 @@ export function CurrentlyPlaying({ currentPage }) {
 
     // queue store
     const queue = useQueueStore((state) => state.queue)
+    const changeQueue = useQueueStore((state) => state.changeQueue)
 
     const navigation = useNavigation()
     const insets = useSafeAreaInsets()
@@ -112,10 +113,12 @@ export function CurrentlyPlaying({ currentPage }) {
             changeDuration(status.durationMillis)
 
             // if currently playing song is completed
-            if (status.positionMillis > status.durationMillis - 40) {
+            if (status.positionMillis > status.durationMillis - 100) {
                 if (queue.length !== 0) {
                     clearInterval(intervalId)
-                    handleNextSong(queue.shift().id)
+                    const currSong = queue[0]
+                    changeQueue(queue.slice(1))
+                    handleNextSong(currSong.id)
                 } else {
                     clearInterval(intervalId)
                     changeIsPlaying(false)
